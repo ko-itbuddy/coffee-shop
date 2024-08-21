@@ -22,7 +22,6 @@ public class OrderService {
     private final UserRepository userRepository;
 
     @Transactional
-    @DistributedLock("#userId")
     public OrderDto order(Long userId, Long menuId) {
 
         MenuEntity menu = menuRepository.findById(menuId).orElseThrow(()->new IllegalArgumentException("존재하지 않는 메뉴입니다."));
