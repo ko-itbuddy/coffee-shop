@@ -1,6 +1,7 @@
 package org.itbuddy.coffeeshop.order.application;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.itbuddy.coffeeshop.config.distributionlock.DistributedLock;
 import org.itbuddy.coffeeshop.menu.domain.MenuEntity;
 import org.itbuddy.coffeeshop.menu.domain.MenuRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class OrderService {
 
@@ -34,9 +36,12 @@ public class OrderService {
                                        .menuId(menuId)
                                        .build();
         orderRepository.save(order);
-
+        sendKafka();
         return OrderDto.ofDtoByOrder(order.getId(), menu);
     }
 
+    void sendKafka(){
+        log.info("send message to kafka");
+    }
 
 }
