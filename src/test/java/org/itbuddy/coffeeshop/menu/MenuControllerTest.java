@@ -2,7 +2,6 @@ package org.itbuddy.coffeeshop.menu;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +19,7 @@ import org.springframework.http.MediaType;
 
 @ActiveProfiles("test")
 @WebMvcTest(controllers = MenuController.class)
-public class MenuEntityControllerTest {
+public class MenuControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
