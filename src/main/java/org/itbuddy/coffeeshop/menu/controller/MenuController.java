@@ -15,7 +15,6 @@ public class MenuController implements MenuControllerDocs {
     private final MenuService menuService;
 
     @Override
-    @Operation(summary = "모든 메뉴를 조회한다.")
     @GetMapping("api/menus")
     public ApiResponse<GetMenuResponse> getMenus() {
         return ApiResponse.ok(new GetMenuResponse(menuService.getMenus()));
