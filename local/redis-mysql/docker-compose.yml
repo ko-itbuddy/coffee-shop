@@ -1,0 +1,22 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: coffee-local
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - 3306:3306
+
+  redis:
+    image: redis:6
+    restart: always
+    ports:
+      - 6379:6379
+
+
+

@@ -4,10 +4,10 @@ spring:
   profiles:
     default: local
   datasource:
-    url: jdbc:mysql://localhost:3306/coffee
+    url: ${DB_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: coffee
-    password: coffee1234#$#$
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     hikari:
       maximum-pool-size: 20
   cache:
@@ -34,6 +34,10 @@ spring:
     hibernate:
       ddl-auto: create
   datasource:
+    url: jdbc:mysql://localhost:3306/coffee-local
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
     p6spy:
       logMessageFormat:
         p6spy: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"
