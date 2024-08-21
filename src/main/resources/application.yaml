@@ -1,0 +1,73 @@
+spring:
+  application:
+    name: coffee-shop
+  profiles:
+    default: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/coffee
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: coffee
+    password: coffee1234#$#$
+    hikari:
+      maximum-pool-size: 20
+  cache:
+    type: redis
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+  datasource:
+    p6spy:
+      logMessageFormat:
+        p6spy: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"
+
+  h2:
+    console:
+      enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    open-in-view: false
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+        dialect.storage_engine: innodb
+  p6spy:
+    logMessageFormat:
+      p6spy: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"
+
+  sql:
+    init:
+      mode: never
+logging:
+  level:
+    org.redisson: info
+#    com.zaxxer.hikari: debug
