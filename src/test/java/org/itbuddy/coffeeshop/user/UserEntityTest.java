@@ -1,24 +1,12 @@
 package org.itbuddy.coffeeshop.user;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
-import org.itbuddy.coffeeshop.config.TestContainerConfig;
-import org.itbuddy.coffeeshop.user.application.UserService;
 import org.itbuddy.coffeeshop.user.domain.UserEntity;
-import org.itbuddy.coffeeshop.user.domain.UserPointTransactionRepository;
-import org.itbuddy.coffeeshop.user.domain.UserRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 
 
 public class UserEntityTest {
@@ -57,6 +45,18 @@ public class UserEntityTest {
             assertThat(user)
                 .extracting("id", "name", "point")
                 .containsExactly(1L, "홍길동", 0);
+
+        }
+
+        @Test
+        @DisplayName("현재 사용자 포인트보다 더큰 금액을 차감")
+        void notEnoughPoint() throws Exception {
+            // given
+            UserEntity user = createUserEntity(1L, "홍길동", 1000);
+            // when
+            // then
+            assertThatThrownBy(() -> user.usePoint(10000)).isInstanceOf(
+                IllegalArgumentException.class);
 
         }
     }

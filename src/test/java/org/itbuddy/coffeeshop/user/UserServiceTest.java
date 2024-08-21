@@ -76,7 +76,7 @@ public class UserServiceTest {
             assertThat(user)
                 .extracting("id", "name", "point")
                 .containsExactly(
-                    1L, "울버린", 11000
+                    userEntity.getId(), "울버린", 11000
                 );
             assertThat(userPointTransactionCustomRepository.findByUserId(user.getId()))
                 .extracting("user.id", "point")
