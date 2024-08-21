@@ -64,9 +64,6 @@ spring:
     logMessageFormat:
       p6spy: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"
 
-  sql:
-    init:
-      mode: never
 logging:
   level:
     org.redisson: info
