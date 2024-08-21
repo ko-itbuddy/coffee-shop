@@ -1,14 +1,20 @@
 package org.itbuddy.coffeeshop.common;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 @Getter
+@Schema(description = "모든 응답의 기본객체")
 public class ApiResponse<T> {
 
+    @Schema(description = "응답 코드")
     private int code;
+    @Schema(description = "응답 상태")
     private HttpStatus status;
+    @Schema(description = "응답 메시지")
     private String msg;
+    @Schema(description = "응답 결과")
     private T result;
 
     public ApiResponse(HttpStatus status, String msg, T result){
