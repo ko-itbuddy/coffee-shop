@@ -1,6 +1,5 @@
 package org.itbuddy.coffeeshop.menu.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.itbuddy.coffeeshop.common.ApiResponse;
 import org.itbuddy.coffeeshop.menu.application.MenuService;
@@ -14,8 +13,9 @@ public class MenuController implements MenuControllerDocs {
 
     private final MenuService menuService;
 
+    public static final String API_GET_MENUS = "/api/menus";
     @Override
-    @GetMapping("api/menus")
+    @GetMapping(API_GET_MENUS)
     public ApiResponse<GetMenuResponse> getMenus() {
         return ApiResponse.ok(new GetMenuResponse(menuService.getMenus()));
     }

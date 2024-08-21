@@ -42,7 +42,7 @@ public class MenuControllerTest {
             // when
             // then
             mockMvc.perform(
-                       get("/api/menus")
+                       get(MenuController.API_GET_MENUS)
                            .contentType(MediaType.APPLICATION_JSON)
                    )
                    .andDo(print())
