@@ -23,7 +23,7 @@
 
 ---
 
-## 빌드 및 실행, 종료
+## 빌드 및 실행
 ### 터미널 환경
 - Git, Java, Docker
 
@@ -33,5 +33,13 @@ $ cd kakaopay-task3
 $ docker-compose -f local/redis-mysql/docker-compose.yml up -d
 $ ./gradlew clean build
 $ java -jar build/libs/coffee-shop.jar
+```
+
+## SWAGGER 접속
+[http://localhost:8080/swagger-ui/index.html]
+
+## 종료
+```
+$ ^C
 $ docker-compose -f local/redis-mysql/docker-compose.yml down
 ```
