@@ -28,7 +28,7 @@
 - Git, Java, Docker
 
 ```
-$ git clone [https://github.com/ko-itbuddy/coffee-shop.git]
+$ git clone [https://github.com/ko-itbuddy/coffee-shop.git](https://github.com/ko-itbuddy/coffee-shop.git)
 $ cd kakaopay-task3
 $ docker-compose -f local/redis-mysql/docker-compose.yml up -d
 $ ./gradlew clean build
@@ -36,7 +36,7 @@ $ java -jar build/libs/coffee-shop.jar
 ```
 
 ## SWAGGER 접속
-[http://localhost:8080/swagger-ui/index.html]
+[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 ## 종료
 ```
