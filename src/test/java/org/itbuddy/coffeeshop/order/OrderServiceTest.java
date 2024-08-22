@@ -3,7 +3,10 @@ package org.itbuddy.coffeeshop.order;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,6 +15,8 @@ import org.itbuddy.coffeeshop.menu.domain.MenuEntity;
 import org.itbuddy.coffeeshop.menu.domain.MenuRepository;
 import org.itbuddy.coffeeshop.order.application.OrderDto;
 import org.itbuddy.coffeeshop.order.application.OrderService;
+import org.itbuddy.coffeeshop.order.application.PopularMenuService;
+import org.itbuddy.coffeeshop.order.domain.OrderEntity;
 import org.itbuddy.coffeeshop.order.domain.OrderRepository;
 import org.itbuddy.coffeeshop.user.domain.UserEntity;
 import org.itbuddy.coffeeshop.user.domain.UserRepository;
@@ -21,8 +26,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.data.auditing.AuditingHandler;
+import org.springframework.data.auditing.DateTimeProvider;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -30,7 +41,6 @@ import org.springframework.test.context.ContextConfiguration;
 @SpringBootTest
 @ExtendWith(TestContainerConfig.class)
 @ContextConfiguration(initializers = TestContainerConfig.IntegrationTestInitializer.class)
-
 public class OrderServiceTest {
 
     @Autowired
@@ -67,7 +77,7 @@ public class OrderServiceTest {
 
     @Nested
     @DisplayName("3. 커피 주문/결제 하기")
-    class getOrders {
+    class PostOrder {
 
         @Test
         @DisplayName("정상")

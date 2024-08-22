@@ -51,7 +51,7 @@ public class MenuServiceTest {
 
     @Nested
     @DisplayName("1. 커피 메뉴 목록 조회")
-    class getMenus {
+    class GetMenus {
 
         @Test
         @DisplayName("정상")

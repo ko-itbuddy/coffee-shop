@@ -32,7 +32,7 @@ public class MenuControllerTest {
 
     @Nested
     @DisplayName("메뉴 목록 조회")
-    class getMenus {
+    class GetMenus {
 
         @Test
         @DisplayName("메뉴 목록 조회")

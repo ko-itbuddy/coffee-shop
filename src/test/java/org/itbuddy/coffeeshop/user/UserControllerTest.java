@@ -35,7 +35,7 @@ public class UserControllerTest {
 
     @Nested
     @DisplayName("사용자 포인트 충전")
-    class chargePoint {
+    class ChargePoint {
 
         @Test
         @DisplayName("정상 요청")

@@ -63,7 +63,7 @@ public class UserServiceTest {
 
     @Nested
     @DisplayName("2. 사용자 포인트 충전")
-    class getMenus {
+    class GetMenus {
 
         @Test
         @DisplayName("정상")

@@ -13,7 +13,7 @@ public class UserEntityTest {
 
     @Nested
     @DisplayName("chargePoint")
-    class chargePoint {
+    class ChargePoint {
 
         @Test
         @DisplayName("정상")
@@ -32,7 +32,7 @@ public class UserEntityTest {
 
     @Nested
     @DisplayName("usePoint")
-    class  usePoint {
+    class UsePoint {
 
         @Test
         @DisplayName("정상")

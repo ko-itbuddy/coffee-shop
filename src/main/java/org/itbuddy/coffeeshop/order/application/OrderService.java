@@ -34,6 +34,7 @@ public class OrderService {
         OrderEntity order = OrderEntity.builder()
                                        .userId(userId)
                                        .menuId(menuId)
+                                       .menuName(menu.getName())
                                        .build();
         orderRepository.save(order);
         sendKafka();

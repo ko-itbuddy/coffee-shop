@@ -13,7 +13,7 @@ public class UserPointTransactionEntityTest {
 
     @Nested
     @DisplayName("chargePoint")
-    class createByCharge {
+    class CreateByCharge {
 
         @Test
         @DisplayName("정상")
