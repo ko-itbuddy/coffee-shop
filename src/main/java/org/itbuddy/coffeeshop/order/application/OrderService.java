@@ -31,12 +31,9 @@ public class OrderService {
         user.usePoint(menu.getPrice());
         userRepository.save(user);
 
-        OrderEntity order = OrderEntity.builder()
-                                       .userId(userId)
-                                       .menuId(menuId)
-                                       .menuName(menu.getName())
-                                       .build();
+        OrderEntity order = OrderEntity.ofEntityByOrder(userId, menu);
         orderRepository.save(order);
+
         sendKafka();
         return OrderDto.ofDtoByOrder(order.getId(), menu);
     }

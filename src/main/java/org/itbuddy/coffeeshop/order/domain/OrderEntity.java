@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.awt.Menu;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -44,6 +45,14 @@ public class OrderEntity extends BaseEntity implements Comparable<OrderEntity> {
         this.userId = userId;
         this.menuId = menuId;
         this.menuName = menuName;
+    }
+
+    public static OrderEntity ofEntityByOrder(Long userId, MenuEntity menu){
+        return OrderEntity.builder()
+                          .userId(userId)
+                          .menuId(menu.getId())
+                          .menuName(menu.getName())
+                          .build();
     }
 
     @Override
