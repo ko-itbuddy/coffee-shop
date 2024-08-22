@@ -5,13 +5,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.itbuddy.coffeeshop.common.BaseEntity;
+import org.itbuddy.coffeeshop.menu.domain.MenuEntity;
 import org.itbuddy.coffeeshop.order.application.OrderDto;
 
 @Getter
@@ -31,10 +36,14 @@ public class OrderEntity extends BaseEntity implements Comparable<OrderEntity> {
     @Column
     private Long menuId;
 
+    @Column
+    private String menuName;
+
     @Builder
-    private OrderEntity(Long userId, Long menuId) {
+    private OrderEntity(Long userId, Long menuId, String menuName) {
         this.userId = userId;
         this.menuId = menuId;
+        this.menuName = menuName;
     }
 
     @Override

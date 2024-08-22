@@ -1,12 +1,14 @@
 package org.itbuddy.coffeeshop.order;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.itbuddy.coffeeshop.order.application.OrderService;
+import org.itbuddy.coffeeshop.order.application.PopularMenuService;
 import org.itbuddy.coffeeshop.order.controller.OrderController;
 import org.itbuddy.coffeeshop.order.controller.request.PostOrderRequest;
 import org.junit.jupiter.api.DisplayName;
@@ -31,6 +33,9 @@ public class OrderControllerTest {
 
     @MockBean
     private OrderService menuService;
+
+    @MockBean
+    private PopularMenuService popularMenuService;
 
     @Nested
     @DisplayName("주문")
@@ -146,6 +151,26 @@ public class OrderControllerTest {
                    .andExpect(jsonPath("$.msg").value("주문 메뉴 아이디는 필수값입니다."));
         }
 
+    }
+
+    @Nested
+    @DisplayName("인기 메뉴 조회")
+    class GetPopularMenu {
+        @Test
+        @DisplayName("성공")
+        void success() throws Exception {
+            // given
+            // when
+            // then
+            mockMvc.perform(
+                       get(OrderController.API_GET_POPULAR_MENUS)
+                           .contentType(MediaType.APPLICATION_JSON)
+                   )
+                   .andDo(print())
+                   .andExpect(status().isOk())
+                   .andExpect(jsonPath("$.code").value("200"))
+                   .andExpect(jsonPath("$.status").value("OK"));
+        }
     }
 
 }
