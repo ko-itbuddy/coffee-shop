@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @ActiveProfiles("test")
 @WebMvcTest(controllers = UserController.class)
-public class UserControllerTest {
+class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

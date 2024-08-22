@@ -25,7 +25,7 @@ import org.springframework.test.context.ContextConfiguration;
 @ExtendWith(TestContainerConfig.class)
 @ContextConfiguration(initializers = TestContainerConfig.IntegrationTestInitializer.class)
 
-public class MenuServiceTest {
+class MenuServiceTest {
 
     @Autowired
     private MenuService menuService;

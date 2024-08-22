@@ -29,7 +29,7 @@ import org.springframework.test.context.ContextConfiguration;
 @SpringBootTest
 @ExtendWith(TestContainerConfig.class)
 @ContextConfiguration(initializers = TestContainerConfig.IntegrationTestInitializer.class)
-public class UserServiceTest {
+class UserServiceTest {
 
     @Autowired
     UserService userService;

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 
-public class UserEntityTest {
+class UserEntityTest {
 
     @Nested
     @DisplayName("chargePoint")

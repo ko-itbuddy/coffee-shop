@@ -35,7 +35,7 @@ import org.springframework.test.context.ContextConfiguration;
 @SpringBootTest
 @ExtendWith(TestContainerConfig.class)
 @ContextConfiguration(initializers = TestContainerConfig.IntegrationTestInitializer.class)
-public class PopularMenuServiceTest {
+class PopularMenuServiceTest {
 
     @Autowired
     private OrderRepository orderRepository;

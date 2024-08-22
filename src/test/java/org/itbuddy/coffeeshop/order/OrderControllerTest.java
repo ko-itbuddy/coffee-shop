@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @ActiveProfiles("test")
 @WebMvcTest(controllers = OrderController.class)
-public class OrderControllerTest {
+class OrderControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

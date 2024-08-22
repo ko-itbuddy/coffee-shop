@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 
 @ActiveProfiles("test")
 @WebMvcTest(controllers = MenuController.class)
-public class MenuControllerTest {
+class MenuControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

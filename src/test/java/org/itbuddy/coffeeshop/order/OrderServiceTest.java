@@ -30,7 +30,7 @@ import org.springframework.test.context.ContextConfiguration;
 @SpringBootTest
 @ExtendWith(TestContainerConfig.class)
 @ContextConfiguration(initializers = TestContainerConfig.IntegrationTestInitializer.class)
-public class OrderServiceTest {
+class OrderServiceTest {
 
     @Autowired
     private UserRepository userRepository;
