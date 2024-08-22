@@ -28,7 +28,7 @@
 - Git, Java, Docker
 
 ```
-$ git clone [https://github.com/ko-itbuddy/coffee-shop.git](https://github.com/ko-itbuddy/coffee-shop.git)
+$ git clone https://github.com/ko-itbuddy/coffee-shop.git
 $ cd kakaopay-task3
 $ docker-compose -f local/redis-mysql/docker-compose.yml up -d
 $ ./gradlew clean build
