@@ -43,3 +43,7 @@ $ java -jar build/libs/coffee-shop.jar
 $ ^C
 $ docker-compose -f local/redis-mysql/docker-compose.yml down
 ```
+
+
+## Velog.io
+https://velog.io/@itbuddy/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%8E%98%EC%9D%B4-%EC%84%9C%EB%B2%84-%EA%B0%9C%EB%B0%9C%EA%B3%BC%EC%A0%9C-%EC%BB%A4%ED%94%BC-%EC%A3%BC%EB%AC%B8-%EC%8B%9C%EC%8A%A4%ED%85%9C
