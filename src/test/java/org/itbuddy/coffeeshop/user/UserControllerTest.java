@@ -1,6 +1,6 @@
 package org.itbuddy.coffeeshop.user;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -48,7 +48,7 @@ class UserControllerTest {
             // when
             // then
             mockMvc.perform(
-                       put(UserController.API_PUT_USER_POINT)
+                       patch(UserController.API_PATCH_USER_POINT)
                            .content(objectMapper.writeValueAsString(request))
                            .contentType(MediaType.APPLICATION_JSON)
                    )
@@ -67,7 +67,7 @@ class UserControllerTest {
             // when
             // then
             mockMvc.perform(
-                       put(UserController.API_PUT_USER_POINT)
+                       patch(UserController.API_PATCH_USER_POINT)
                            .content(objectMapper.writeValueAsString(request))
                            .contentType(MediaType.APPLICATION_JSON)
                    )
@@ -89,7 +89,7 @@ class UserControllerTest {
             // when
             // then
             mockMvc.perform(
-                       put(UserController.API_PUT_USER_POINT)
+                       patch(UserController.API_PATCH_USER_POINT)
                            .content(objectMapper.writeValueAsString(request))
                            .contentType(MediaType.APPLICATION_JSON)
                    )
@@ -111,7 +111,7 @@ class UserControllerTest {
             // when
             // then
             mockMvc.perform(
-                       put(UserController.API_PUT_USER_POINT)
+                       patch(UserController.API_PATCH_USER_POINT)
                            .content(objectMapper.writeValueAsString(request))
                            .contentType(MediaType.APPLICATION_JSON)
                    )
@@ -133,7 +133,7 @@ class UserControllerTest {
             // when
             // then
             mockMvc.perform(
-                       put(UserController.API_PUT_USER_POINT)
+                       patch(UserController.API_PATCH_USER_POINT)
                            .content(objectMapper.writeValueAsString(request))
                            .contentType(MediaType.APPLICATION_JSON)
                    )
