@@ -46,4 +46,4 @@ $ docker-compose -f local/redis-mysql/docker-compose.yml down
 
 
 ## Velog.io
-https://velog.io/@itbuddy/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%8E%98%EC%9D%B4-%EC%84%9C%EB%B2%84-%EA%B0%9C%EB%B0%9C%EA%B3%BC%EC%A0%9C-%EC%BB%A4%ED%94%BC-%EC%A3%BC%EB%AC%B8-%EC%8B%9C%EC%8A%A4%ED%85%9C
+[카카오페이 서버 개발과제 (5) 완료 후기, 다시 시작](https://velog.io/@itbuddy/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%8E%98%EC%9D%B4-%EC%84%9C%EB%B2%84-%EA%B0%9C%EB%B0%9C%EA%B3%BC%EC%A0%9C-5-%EC%99%84%EB%A3%8C-%ED%9B%84%EA%B8%B0-%EB%8B%A4%EC%8B%9C-%EC%8B%9C%EC%9E%91)
