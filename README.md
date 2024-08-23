@@ -13,13 +13,15 @@
     - OS: Mac OS X
     - GIT
     - Docker
-- Server
+      
+- 사용 라이브러리
     - Java17
     - Spring Boot 3.3.1
     - JPA
     - Gradle
     - Junit5
     - TestContainer
+    - 
 
 ---
 
