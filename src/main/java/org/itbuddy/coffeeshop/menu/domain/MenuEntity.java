@@ -23,7 +23,7 @@ import org.itbuddy.coffeeshop.menu.application.MenuDto;
 public class MenuEntity extends BaseEntity implements Comparable<MenuEntity> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column

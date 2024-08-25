@@ -29,7 +29,7 @@ public class UserPointTransactionEntity extends BaseEntity implements
     Comparable<UserPointTransactionEntity> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

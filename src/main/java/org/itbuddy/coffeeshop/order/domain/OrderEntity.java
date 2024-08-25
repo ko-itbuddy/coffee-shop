@@ -28,7 +28,7 @@ import org.itbuddy.coffeeshop.order.application.OrderDto;
 public class OrderEntity extends BaseEntity implements Comparable<OrderEntity> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column

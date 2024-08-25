@@ -31,7 +31,7 @@ import org.itbuddy.coffeeshop.user.application.UserDto;
 public class UserEntity extends BaseEntity implements Comparable<UserEntity> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 30)
