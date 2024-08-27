@@ -7,7 +7,7 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_DATABASE: coffee-local
+      MYSQL_DATABASE: coffee
       MYSQL_ROOT_PASSWORD: 1234
     ports:
       - 3306:3306

@@ -1,0 +1,21 @@
+# Ingress API 버전: networking.k8s.io/v1
+# Ingress 이름: snackbar
+# Ingress 네임스페이스: snackbar
+# Ingress 레이블: project=snackbar
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: coffee-shop
+  namespace: coffee-shop
+  labels:
+    tier: ingress
+    app: ingress
+spec:
+
+# Ingress defaultBackend 서비스 이름: home
+# Ingress defaultBackend 서비스 포트: 80
+  defaultBackend:
+    service:
+      name: coffee-shop
+      port:
+        number: 8080

@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: coffee-shop
+  namespace: coffee-shop
+  labels:
+    tier: app
+    app: coffee-shop
+spec:
+  type: NodePort
+  selector:
+    tier: app
+    app: coffee-shop
+  ports:
+  - port: 8080
+    targetPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffee-shop
+  namespace: coffee-shop
+  labels: 
+    tier: app
+    app: coffee-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: app
+      app: coffee-shop
+  template:
+    metadata:
+      labels:
+        tier: app
+        app: coffee-shop
+    spec:
+      containers:
+      - name: coffee-shop
+        image: skvudrms54/coffee-shop:1.0.5
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: minikube
+        - name: MYSQL_SERVICE_USERNAME
+          value: root
+        - name: MYSQL_SERVICE_PASSWORD
+          value: minikube
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "1000m"
+        ports:
+        - containerPort: 8080
+
+
