@@ -48,7 +48,7 @@ $ docker-compose -f local/redis-mysql/docker-compose.yml down
 ---
 ### 2. 터미널 환경 (Minikube 환경)
 
-
+![kubernetes diagram](<_coffee-shop kubernetes diagram.drawio.png>)
 
 ```
 ## minikube 설치
