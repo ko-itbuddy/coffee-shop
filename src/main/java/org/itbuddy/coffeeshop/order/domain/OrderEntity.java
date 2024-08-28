@@ -5,12 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.awt.Menu;
-import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -58,6 +53,13 @@ public class OrderEntity extends BaseEntity implements Comparable<OrderEntity> {
     @Override
     public int compareTo(OrderEntity o) {
         return 1;
+    }
+
+    public OrderDto toDto(MenuEntity menu) {
+        return OrderDto.builder()
+                       .id(this.id)
+                       .menu(menu.toDto())
+                       .build();
     }
 
 }

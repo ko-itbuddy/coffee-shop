@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.itbuddy.coffeeshop.common.KafkaMessagePublisher;
 import org.itbuddy.coffeeshop.config.TestContainerConfig;
 import org.itbuddy.coffeeshop.menu.domain.MenuEntity;
 import org.itbuddy.coffeeshop.menu.domain.MenuRepository;
 import org.itbuddy.coffeeshop.order.application.OrderDto;
 import org.itbuddy.coffeeshop.order.application.OrderService;
 import org.itbuddy.coffeeshop.order.domain.OrderRepository;
+import org.itbuddy.coffeeshop.order.event.OrderEventListener;
 import org.itbuddy.coffeeshop.user.domain.UserEntity;
 import org.itbuddy.coffeeshop.user.domain.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -23,6 +25,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -44,6 +47,12 @@ public class OrderServiceTest {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+
+    @Autowired
+    private KafkaMessagePublisher kafkaMessagePublisher;
 
 
     @BeforeEach

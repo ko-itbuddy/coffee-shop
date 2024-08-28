@@ -16,7 +16,7 @@ public class MenuDto {
     private final int price;
 
     @Builder
-    private MenuDto(Long id, String name, int price) {
+    public MenuDto(Long id, String name, int price) {
         this.id = id;
         this.name = name;
         this.price = price;
