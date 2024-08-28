@@ -42,8 +42,4 @@ public class OrderService {
         return OrderDto.ofDtoByOrder(order.getId(), menu);
     }
 
-    void sendKafka(){
-        log.info("send message to kafka");
-    }
-
 }
