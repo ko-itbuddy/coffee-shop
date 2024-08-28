@@ -2,15 +2,15 @@ package org.itbuddy.coffeeshop.order.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.itbuddy.coffeeshop.common.KafkaMessagePublisher;
-import org.itbuddy.coffeeshop.common.KafkaTopic;
 import org.itbuddy.coffeeshop.config.distributionlock.DistributedLock;
 import org.itbuddy.coffeeshop.menu.domain.MenuEntity;
 import org.itbuddy.coffeeshop.menu.domain.MenuRepository;
 import org.itbuddy.coffeeshop.order.domain.OrderEntity;
 import org.itbuddy.coffeeshop.order.domain.OrderRepository;
+import org.itbuddy.coffeeshop.order.event.OrderEvent;
 import org.itbuddy.coffeeshop.user.domain.UserEntity;
 import org.itbuddy.coffeeshop.user.domain.UserRepository;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +23,7 @@ public class OrderService {
     private final MenuRepository menuRepository;
     private final UserRepository userRepository;
 
-    private final KafkaMessagePublisher kafkaMessagePublisher;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @Transactional
     @DistributedLock("#userId")
@@ -38,7 +38,7 @@ public class OrderService {
         final OrderEntity order = OrderEntity.ofEntityByOrder(userId, menu);
         final OrderDto orderDto = orderRepository.save(order).toDto(menu);
 
-        kafkaMessagePublisher.publish(KafkaTopic.ORDER, orderDto.getId().toString(), orderDto);
+        applicationEventPublisher.publishEvent(new OrderEvent(orderDto));
         return OrderDto.ofDtoByOrder(order.getId(), menu);
     }
 
