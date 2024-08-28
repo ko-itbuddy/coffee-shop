@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper
+  namespace: coffee-shop
+  labels:
+    tier: infra
+    name: zookeeper
+spec:
+  ports:
+    - name: client
+      port: 2181
+      protocol: TCP
+    - name: follower
+      port: 2888
+      protocol: TCP
+    - name: leader
+      port: 3888
+      protocol: TCP
+  selector:
+    tier: infra
+    name: zookeeper
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper
+  namespace: coffee-shop
+  labels:
+    tier: infra
+    name: zookeeper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: infra
+      name: zookeeper
+  template:
+    metadata:
+      labels:
+        tier: infra
+        name: zookeeper
+    spec:
+      containers:
+        - name: zookeeper
+          image: wurstmeister/zookeeper
+          ports:
+            - containerPort: 2181

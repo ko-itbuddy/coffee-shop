@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: coffee-shop
-        image: skvudrms54/coffee-shop:1.0.5
+        image: skvudrms54/coffee-shop:1.0.9
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: minikube
