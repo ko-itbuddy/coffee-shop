@@ -26,9 +26,9 @@ public class OrderController implements OrderControllerDoc {
     private final PopularMenuService popularMenuService;
 
     @PostMapping(API_POST_ORDER)
-    public ApiResponse<PostOrderResponse> order(@Valid @RequestBody PostOrderRequest request) {
+    public ApiResponse<PostOrderResponse> createOrder(@Valid @RequestBody PostOrderRequest request) {
         return ApiResponse.ok(
-            new PostOrderResponse(orderService.order(request.getUserId(), request.getMenuId()))
+            new PostOrderResponse(orderService.createOrder(request.getUserId(), request.getMenuId()))
         );
     }
 

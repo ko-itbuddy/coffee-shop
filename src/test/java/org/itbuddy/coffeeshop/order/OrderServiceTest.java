@@ -14,7 +14,6 @@ import org.itbuddy.coffeeshop.menu.domain.MenuRepository;
 import org.itbuddy.coffeeshop.order.application.OrderDto;
 import org.itbuddy.coffeeshop.order.application.OrderService;
 import org.itbuddy.coffeeshop.order.domain.OrderRepository;
-import org.itbuddy.coffeeshop.order.event.OrderEventListener;
 import org.itbuddy.coffeeshop.user.domain.UserEntity;
 import org.itbuddy.coffeeshop.user.domain.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -90,7 +89,7 @@ public class OrderServiceTest {
                                                 "1500원 짜리 메뉴 미존재"));
 
             // when
-            OrderDto order = orderService.order(user.getId(), menu.getId());
+            OrderDto order = orderService.createOrder(user.getId(), menu.getId());
             // then
             assertThat(order).extracting("menu.name", "menu.price")
                              .containsExactly(
@@ -117,7 +116,7 @@ public class OrderServiceTest {
                                                 "10000 짜리 메뉴 미존재"));
 
             // when
-            OrderDto order = orderService.order(user.getId(), menu.getId());
+            OrderDto order = orderService.createOrder(user.getId(), menu.getId());
             // then
             assertThat(order).extracting("menu.name", "menu.price")
                              .containsExactly(
@@ -146,7 +145,7 @@ public class OrderServiceTest {
             // when
             // then
 
-            assertThatThrownBy(() -> orderService.order(user.getId(), menu.getId()))
+            assertThatThrownBy(() -> orderService.createOrder(user.getId(), menu.getId()))
                 .isInstanceOf(IllegalArgumentException.class);
             UserEntity payedUser = userRepository.findById(user.getId())
                                                  .orElseThrow(() -> new IllegalArgumentException(
@@ -195,7 +194,7 @@ public class OrderServiceTest {
             int finalI = i;
             executorService.submit(() -> {
                 try {
-                    orderService.order(userId, menuId);
+                    orderService.createOrder(userId, menuId);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 } finally {
