@@ -1,10 +1,7 @@
-node.name: ${NODE_NAME}
 
 spring:
   application:
     name: coffee-shop
-  profiles:
-    default: local
   cache:
     type: redis
 
@@ -17,83 +14,4 @@ management:
   endpoint:
     health:
       show-details: always
-      
 
----
-spring:
-  config:
-    activate:
-      on-profile: minikube
-  sql.init.mode: always
-  jpa:
-    hibernate:
-      ddl-auto: create
-    defer-datasource-initialization: true
-  datasource:
-    url: jdbc:mysql://${MYSQL_SERVICE_HOST}:${MYSQL_SERVICE_PORT}/coffee
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${MYSQL_SERVICE_USERNAME}
-    password: ${MYSQL_SERVICE_PASSWORD}
-    p6spy:
-      logMessageFormat:
-        p6spy: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)" 
-  data:
-    redis:
-      host: ${REDIS_SERVICE_HOST}
-      port: ${REDIS_SERVICE_PORT}
-  kafka:
-    producer:
-      bootstrap-servers:
-        - ${KAFKA_SERVICE_HOST}:${KAFKA_SERVICE_PORT_KAFKA_PORT}
----
-spring:
-  config:
-    activate:
-      on-profile: local
-  sql.init.mode: always
-  jpa:
-    hibernate:
-      ddl-auto: create
-    defer-datasource-initialization: true
-  datasource:
-    url: jdbc:mysql://localhost:3306/coffee-local
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 1234
-    p6spy:
-      logMessageFormat:
-        p6spy: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"
-  data:
-    redis:
-      host: localhost
-      port: 6379
-  kafka:
-    producer:
-      bootstrap-servers:
-        - 'localhost:9092'
----
-spring:
-  config:
-    activate:
-      on-profile: test
-
-
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    generate-ddl: true
-    hibernate:
-      ddl-auto: create
-    open-in-view: false
-    properties:
-      hibernate:
-        default_batch_fetch_size: 1000
-        dialect.storage_engine: innodb
-  p6spy:
-    logMessageFormat:
-      p6spy: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"
-
-logging:
-  level:
-    org.redisson: info
-#    com.zaxxer.hikari: debug

@@ -1,0 +1,25 @@
+
+spring:
+  config:
+    import: classpath:/application.yaml
+  sql.init.mode: always
+  jpa:
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  datasource:
+    url: jdbc:mysql://mysql:3306/coffee-stg
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+    p6spy:
+      logMessageFormat:
+        p6spy: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"
+  data:
+    redis:
+      host: redis
+      port: 6379
+  kafka:
+    producer:
+      bootstrap-servers:
+        - kafka:9092

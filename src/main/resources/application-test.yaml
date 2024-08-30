@@ -1,0 +1,25 @@
+
+spring:
+  config:
+    import: classpath:/application.yaml
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    open-in-view: false
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+        dialect.storage_engine: innodb
+  p6spy:
+    logMessageFormat:
+      p6spy: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"
+
+logging:
+  level:
+    org.redisson: info
+#    com.zaxxer.hikari: debug
