@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -19,7 +20,9 @@ import org.itbuddy.coffeeshop.order.application.OrderDto;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @ToString
-@Table(name = "TB_ORDER")
+@Table(name = "TB_ORDER", indexes = {
+    @Index(name = "idx__menuId__menuName__cratedAt", columnList = "menuId, menuName, createdAt")
+})
 public class OrderEntity extends BaseEntity implements Comparable<OrderEntity> {
 
     @Id
