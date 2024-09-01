@@ -19,7 +19,7 @@ public class UserService {
     @Transactional
     @DistributedLock("#userId")
     public UserDto chargePoint(Long userId, Integer point) throws Exception{
-        UserEntity user = userRepository.findById(userId).orElseThrow(
+        final UserEntity user = userRepository.findById(userId).orElseThrow(
             () -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
         user.chargePoint(point);
         userRepository.save(user);
