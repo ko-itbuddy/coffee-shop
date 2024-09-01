@@ -15,6 +15,8 @@ import org.itbuddy.coffeeshop.order.application.OrderDto;
 import org.itbuddy.coffeeshop.order.application.OrderService;
 import org.itbuddy.coffeeshop.order.domain.OrderRepository;
 import org.itbuddy.coffeeshop.user.domain.UserEntity;
+import org.itbuddy.coffeeshop.user.domain.UserPointTransactionEntity;
+import org.itbuddy.coffeeshop.user.domain.UserPointTransactionRepository;
 import org.itbuddy.coffeeshop.user.domain.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,6 +40,9 @@ public class OrderServiceTest {
     private UserRepository userRepository;
 
     @Autowired
+    private UserPointTransactionRepository userPointTransactionRepository;
+
+    @Autowired
     private MenuRepository menuRepository;
 
 
@@ -59,6 +64,7 @@ public class OrderServiceTest {
 
         UserEntity user = createUserEntity("홍길동", 10000);
         userRepository.save(user);
+        userPointTransactionRepository.save(UserPointTransactionEntity.createByCharge(user, 10000));
         MenuEntity menu1 = createMenuEntity("아메리카노", 1500);
         MenuEntity menu2 = createMenuEntity("바가지 아메리카노", 10000);
         MenuEntity menu3 = createMenuEntity("더 바가지 아메리카노", 20000);
@@ -70,6 +76,7 @@ public class OrderServiceTest {
         orderRepository.deleteAllInBatch();
         userRepository.deleteAllInBatch();
         menuRepository.deleteAllInBatch();
+        userPointTransactionRepository.deleteAllInBatch();
     }
 
     @Nested
@@ -100,6 +107,11 @@ public class OrderServiceTest {
                                                      "사용자가 없습니다."));
             assertThat(payedUser).extracting("id", "point")
                                  .containsExactly(user.getId(), 8500);
+            Integer payedUserPoint = userPointTransactionRepository.findAllByUserId(payedUser.getId())
+                                                                   .stream()
+                                                                   .mapToInt(UserPointTransactionEntity::getPoint)
+                                                                   .sum();
+            assertThat(payedUser.getPoint()).isEqualTo(payedUserPoint);
 
         }
 
@@ -127,6 +139,11 @@ public class OrderServiceTest {
                                                      "사용자가 없습니다."));
             assertThat(payedUser).extracting("id", "point")
                                  .containsExactly(user.getId(), 0);
+            Integer payedUserPoint = userPointTransactionRepository.findAllByUserId(payedUser.getId())
+                                                                   .stream()
+                                                                   .mapToInt(UserPointTransactionEntity::getPoint)
+                                                                   .sum();
+            assertThat(payedUser.getPoint()).isEqualTo(payedUserPoint);
 
         }
 
@@ -152,6 +169,11 @@ public class OrderServiceTest {
                                                      "사용자가 없습니다."));
             assertThat(payedUser).extracting("id", "point")
                                  .containsExactly(user.getId(), 10000);
+            Integer payedUserPoint = userPointTransactionRepository.findAllByUserId(payedUser.getId())
+                                                                   .stream()
+                                                                   .mapToInt(UserPointTransactionEntity::getPoint)
+                                                                   .sum();
+            assertThat(payedUser.getPoint()).isEqualTo(payedUserPoint);
         }
 
         @Test
@@ -180,6 +202,11 @@ public class OrderServiceTest {
                                                      "사용자가 없습니다."));
             assertThat(payedUser).extracting("id", "point")
                                  .containsExactly(user.getId(), 1000);
+            Integer payedUserPoint = userPointTransactionRepository.findAllByUserId(payedUser.getId())
+                                                                   .stream()
+                                                                   .mapToInt(UserPointTransactionEntity::getPoint)
+                                                                   .sum();
+            assertThat(payedUser.getPoint()).isEqualTo(payedUserPoint);
 
         }
 

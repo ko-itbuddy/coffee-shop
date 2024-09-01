@@ -55,4 +55,8 @@ public class UserPointTransactionEntity extends BaseEntity implements
     public static UserPointTransactionEntity createByCharge(UserEntity user, Integer point) {
         return new UserPointTransactionEntity(user, point);
     }
+
+    public static  UserPointTransactionEntity createByUse(UserEntity user, Integer point){
+        return new UserPointTransactionEntity(user, -point);
+    }
 }

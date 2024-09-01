@@ -12,6 +12,7 @@ import org.itbuddy.coffeeshop.user.application.UserDto;
 import org.itbuddy.coffeeshop.user.application.UserService;
 import org.itbuddy.coffeeshop.user.domain.UserEntity;
 import org.itbuddy.coffeeshop.user.domain.UserPointTransactionCustomRepository;
+import org.itbuddy.coffeeshop.user.domain.UserPointTransactionEntity;
 import org.itbuddy.coffeeshop.user.domain.UserPointTransactionRepository;
 import org.itbuddy.coffeeshop.user.domain.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -53,6 +54,12 @@ public class UserServiceTest {
         UserEntity user4 = createUserEntity("기영이", 1000);
 
         userRepository.saveAll(List.of(user1, user2, user3, user4));
+        userPointTransactionRepository.saveAll(List.of(
+            UserPointTransactionEntity.createByCharge(user1, 1000),
+            UserPointTransactionEntity.createByCharge(user2, 1000),
+            UserPointTransactionEntity.createByCharge(user3, 1000),
+            UserPointTransactionEntity.createByCharge(user4, 1000)
+        ));
     }
 
     @AfterEach
@@ -81,8 +88,14 @@ public class UserServiceTest {
             assertThat(userPointTransactionCustomRepository.findByUserId(user.getId()))
                 .extracting("user.id", "point")
                 .containsExactly(
+                    tuple(userEntity.getId(), 1000),
                     tuple(userEntity.getId(), 10000)
                 );
+            Integer chargedUserPoint = userPointTransactionRepository.findAllByUserId(user.getId())
+                                                                   .stream()
+                                                                   .mapToInt(UserPointTransactionEntity::getPoint)
+                                                                   .sum();
+            assertThat(user.getPoint()).isEqualTo(chargedUserPoint);
 
         }
 
@@ -97,7 +110,7 @@ public class UserServiceTest {
 
             // when
             CountDownLatch latch = new CountDownLatch(3 * 3);
-            ExecutorService executorService = Executors.newFixedThreadPool(32);
+            ExecutorService executorService = Executors.newFixedThreadPool(6);
 
             makeCountDownLatch(latch, executorService, userEntities.get(0), 1000,
                 latch.getCount() / 3);
@@ -108,9 +121,10 @@ public class UserServiceTest {
 
             latch.await();
 
+            UserEntity chargedUser1 = userRepository.findById(user1.getId())
+                                                    .orElseThrow(() -> new IllegalArgumentException());
             // then
-            assertThat(userRepository.findById(user1.getId())
-                                     .orElseThrow(() -> new IllegalArgumentException()))
+            assertThat(chargedUser1)
                 .extracting("id", "name", "point")
                 .containsExactly(user1.getId(), user1.getName(), 4000);
             assertThat(userPointTransactionCustomRepository.findByUserId(user1.getId()))
@@ -118,11 +132,19 @@ public class UserServiceTest {
                 .containsExactly(
                     tuple(user1.getId(), 1000),
                     tuple(user1.getId(), 1000),
+                    tuple(user1.getId(), 1000),
                     tuple(user1.getId(), 1000)
                 );
+            Integer chargedUserPoint1 = userPointTransactionRepository.findAllByUserId(user1.getId())
+                                                                   .stream()
+                                                                   .mapToInt(UserPointTransactionEntity::getPoint)
+                                                                   .sum();
+            assertThat(chargedUser1.getPoint()).isEqualTo(chargedUserPoint1);
 
-            assertThat(userRepository.findById(user2.getId())
-                                     .orElseThrow(() -> new IllegalArgumentException()))
+            UserEntity chargedUser2 = userRepository.findById(user2.getId())
+                                                    .orElseThrow(() -> new IllegalArgumentException());
+
+            assertThat(chargedUser2)
                 .extracting("id", "name", "point")
                 .containsExactly(user2.getId(), user2.getName(), 4000);
             assertThat(userPointTransactionCustomRepository.findByUserId(user2.getId()))
@@ -130,11 +152,21 @@ public class UserServiceTest {
                 .containsExactly(
                     tuple(user2.getId(), 1000),
                     tuple(user2.getId(), 1000),
+                    tuple(user2.getId(), 1000),
                     tuple(user2.getId(), 1000)
+
                 );
 
-            assertThat(userRepository.findById(user3.getId())
-                                     .orElseThrow(() -> new IllegalArgumentException()))
+            Integer chargedUserPoint2 = userPointTransactionRepository.findAllByUserId(user2.getId())
+                                                                   .stream()
+                                                                   .mapToInt(UserPointTransactionEntity::getPoint)
+                                                                   .sum();
+            assertThat(chargedUser2.getPoint()).isEqualTo(chargedUserPoint2);
+
+            UserEntity chargedUser3 = userRepository.findById(user3.getId())
+                                                    .orElseThrow(() -> new IllegalArgumentException());
+
+            assertThat(chargedUser3)
                 .extracting("id", "name", "point")
                 .containsExactly(user3.getId(), user3.getName(), 4000);
             assertThat(userPointTransactionCustomRepository.findByUserId(user3.getId()))
@@ -142,8 +174,15 @@ public class UserServiceTest {
                 .containsExactly(
                     tuple(user3.getId(), 1000),
                     tuple(user3.getId(), 1000),
+                    tuple(user3.getId(), 1000),
                     tuple(user3.getId(), 1000)
                 );
+
+            Integer chargedUserPoint3 = userPointTransactionRepository.findAllByUserId(user3.getId())
+                                                                   .stream()
+                                                                   .mapToInt(UserPointTransactionEntity::getPoint)
+                                                                   .sum();
+            assertThat(chargedUser3.getPoint()).isEqualTo(chargedUserPoint3);
 
         }
     }
