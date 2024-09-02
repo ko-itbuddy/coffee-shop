@@ -21,7 +21,7 @@ import org.itbuddy.coffeeshop.order.application.OrderDto;
 @Entity
 @ToString
 @Table(name = "TB_ORDER", indexes = {
-    @Index(name = "idx__menuId__menuName__cratedAt", columnList = "menuId, menuName, createdAt")
+    @Index(name = "idx__cratedAt__menuId__menuName", columnList = "createdAt, menuId, menuName")
 })
 public class OrderEntity extends BaseEntity implements Comparable<OrderEntity> {
 
