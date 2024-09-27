@@ -1,6 +1,7 @@
 package org.itbuddy.coffeeshop.config.distributionlock;
 
 import java.lang.reflect.Method;
+import java.util.StringJoiner;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -28,12 +29,19 @@ public class DistributedLockAop {
         Method method = signature.getMethod();
         DistributedLock distributedLock = method.getAnnotation(DistributedLock.class);
 
-        String key = String.format("%s:%s:%s:%s",
-            REDISSON_LOCK_PREFIX,
-            method.getDeclaringClass().getName(),
-            method.getName(),
-            CustomSpringELParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), distributedLock.value())
-        );
+        String key = (new StringJoiner(":"))
+            .add(REDISSON_LOCK_PREFIX)
+            .add(method.getDeclaringClass().getName())
+            .add(method.getName())
+            .add(CustomSpringELParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), distributedLock.value()).toString())
+            .toString();
+
+//        String key = String.format("%s:%s:%s:%s",
+//            REDISSON_LOCK_PREFIX,
+//            method.getDeclaringClass().getName(),
+//            method.getName(),
+//            CustomSpringELParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), distributedLock.value()).
+//        );
 
         RLock rLock = redissonClient.getLock(key);
 
