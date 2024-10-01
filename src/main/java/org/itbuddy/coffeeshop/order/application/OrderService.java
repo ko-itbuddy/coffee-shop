@@ -42,7 +42,7 @@ public class OrderService {
             menu.getPrice()));
 
         final OrderEntity order = OrderEntity.ofEntityByOrder(userId, menu);
-        final OrderDto orderDto = orderRepository.save(order).toDto(menu);
+        final OrderDto orderDto = OrderDto.of(orderRepository.save(order), menu);
 
         applicationEventPublisher.publishEvent(new OrderEvent(orderDto));
         return OrderDto.ofDtoByOrder(order.getId(), menu);

@@ -24,6 +24,6 @@ public class UserService {
         user.chargePoint(point);
         userRepository.save(user);
         userPointTransactionRepository.save(UserPointTransactionEntity.createByCharge(user,point));
-        return user.toDto();
+        return UserDto.of(user);
     }
 }

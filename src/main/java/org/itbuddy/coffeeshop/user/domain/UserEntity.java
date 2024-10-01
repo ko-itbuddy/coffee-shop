@@ -66,11 +66,5 @@ public class UserEntity extends BaseEntity implements Comparable<UserEntity> {
 
 
 
-    public UserDto toDto() {
-        return UserDto.builder()
-            .id(this.getId())
-            .name(this.getName())
-            .point(this.getPoint())
-                         .build();
-    }
+
 }

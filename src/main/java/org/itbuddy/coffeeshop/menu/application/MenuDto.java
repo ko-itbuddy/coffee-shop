@@ -3,6 +3,7 @@ package org.itbuddy.coffeeshop.menu.application;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
+import org.itbuddy.coffeeshop.menu.domain.MenuEntity;
 
 @Getter
 @Schema(description = "메뉴")
@@ -20,5 +21,13 @@ public class MenuDto {
         this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public static MenuDto of(MenuEntity entity) {
+        return MenuDto.builder()
+                      .id(entity.getId())
+                      .name(entity.getName())
+                      .price(entity.getPrice())
+                      .build();
     }
 }

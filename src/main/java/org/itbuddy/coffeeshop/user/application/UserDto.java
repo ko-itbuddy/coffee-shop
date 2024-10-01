@@ -4,6 +4,8 @@ package org.itbuddy.coffeeshop.user.application;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
+import org.itbuddy.coffeeshop.user.domain.UserEntity;
+import org.itbuddy.coffeeshop.user.domain.UserPointTransactionEntity;
 
 @Getter
 @Schema(description = "사용자")
@@ -22,4 +24,23 @@ public class UserDto {
         this.name = name;
         this.point = point;
     }
+
+
+
+    public UserEntity toEntity() {
+        return UserEntity.builder()
+                      .id(this.getId())
+                      .name(this.getName())
+                      .point(this.getPoint())
+                      .build();
+    }
+
+    public static UserDto of(UserEntity entity) {
+        return UserDto.builder()
+                      .id(entity.getId())
+                      .name(entity.getName())
+                      .point(entity.getPoint())
+                      .build();
+    }
+
 }

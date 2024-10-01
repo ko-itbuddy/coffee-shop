@@ -16,7 +16,7 @@ public class MenuService {
     public List<MenuDto> getMenus() {
         return menuRepository.findAll()
                              .stream()
-                             .map(MenuEntity::toDto)
+                             .map(MenuDto::of)
                              .collect(Collectors.toList());
     }
 }

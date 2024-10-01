@@ -45,11 +45,4 @@ public class MenuEntity extends BaseEntity implements Comparable<MenuEntity> {
         return 1;
     }
 
-    public MenuDto toDto() {
-        return MenuDto.builder()
-                      .id(this.getId())
-                      .name(this.getName())
-                      .price(this.getPrice())
-                      .build();
-    }
 }

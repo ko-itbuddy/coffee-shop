@@ -58,11 +58,4 @@ public class OrderEntity extends BaseEntity implements Comparable<OrderEntity> {
         return 1;
     }
 
-    public OrderDto toDto(MenuEntity menu) {
-        return OrderDto.builder()
-                       .id(this.id)
-                       .menu(menu.toDto())
-                       .build();
-    }
-
 }
